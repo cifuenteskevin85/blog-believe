@@ -1,0 +1,24 @@
+%h2 
+  = "Editar #{resource_name.to_s.humanize}"
+
+= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :email, required: true, autofocus: true
+    = f.input :password, autocomplete: "off", hint: "Dejelo en blanco si no desea cambiarlo.", required: false
+    %br
+    = f.input :password_confirmation, required: false
+    = f.input :current_password, hint: "Nosotros necesitamos su contraseña actual para confirmar sus cambios.", required: true
+    = f.input :avatar, :as => :file, hint: f.template.image_tag(f.object.avatar.url(:medium))
+
+  .form-actions
+    = f.button :submit, "Update"
+
+%h3 Cancelar mi Cuenta
+
+%p
+  ¿Inconforme? 
+  = link_to "Cancelar mi Cuenta", registration_path(resource_name), data: { confirm: "¿Esta seguro?"}, method: :delete
+
+= link_to "Back", :back

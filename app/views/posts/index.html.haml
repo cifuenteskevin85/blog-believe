@@ -1,0 +1,19 @@
+.pagination
+  = paginate @posts
+- @posts.each do |post|
+  %p
+    .row
+      .three.column.panel
+        = image_tag post.user.avatar.url(:thumb),class: "th", style: "float: left; width: 60px; height: 60px;"
+        = post.user.full_name
+        %br
+        = post.user.created_at.strftime("%d de %b de %Y")
+      .nine.column
+        %h1
+          = link_to post.title, post_path(post)
+          .small
+            = "Publicado por #{post.user.full_name}"
+      
+        = post.body.html_safe
+        %h6
+          = "Fecha de Publicación #{post.publish_date}"

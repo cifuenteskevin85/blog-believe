@@ -1,0 +1,17 @@
+.row
+  .twelve.column
+    .panel
+      =simple_form_for(@post) do |f|
+        .row
+          .five.columns
+            =f.input :title,label: "Titulo"
+        .row
+          .twelve.columns
+            =f.cktext_area :body
+            =#f.input :body,label:"Contenido"
+        .row
+          .five.columns
+            =f.hidden_field :publish_date, value: Date.today
+            ="Fecha de publicación #{Date.today.strftime("%d-%m, %Y")}"
+        %hr
+        =f.button :submit, "Crear post"

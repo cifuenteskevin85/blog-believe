@@ -1,0 +1,65 @@
+!!!
+%html
+  %head
+  %title BlogBelieve
+  = stylesheet_link_tag    "application", :media => "all"
+  = javascript_include_tag "application"
+  = csrf_meta_tags
+  %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}
+  %body
+    %header
+      .top-bar
+        %ul
+          %li.name
+            %h1
+              =link_to "Blog Believe", root_path
+        %section
+          %ul.right
+            -if user_signed_in?
+              %li
+                %a
+                  = image_tag current_user.avatar.url(:thumb),class: "th", style: "width: 50px; height: 40px"
+              %li.has-dropdown
+                %a 
+                  =current_user.full_name
+                %ul.dropdown
+                  %li
+                    =link_to "Crear nuevo post", new_post_path
+                  %li
+                    =link_to "Cerrar Sesión", destroy_user_session_path, method: :delete
+            -else
+              %li
+                =link_to "Iniciar Sesión", new_user_session_path
+    .container
+      .row
+        .twelve.columns
+          -if flash[:notice]
+            .alert-box.success
+              %a.close{href: ""} &times;
+              =flash[:notice]
+          -if flash[:alert]
+            .alert-box.alert
+              %a.close{href: ""} &times;
+              =flash[:alert]
+      .row
+        .twelve.columns
+          = yield
+    %footer
+      .container
+        .row
+          .twelve.columns
+            .panel
+              .row
+                .three.columns
+                  .panel.radius
+                    %img{src:"/ckeditor_assets/pictures/2/content_die_harder.jpg"}
+                .three.columns
+                  .panel.radius
+                .three.columns
+                  .panel.radius
+                .three.columns
+                  .panel.radius
+    #copyright
+      .row
+        .four.columns
+          %p S&WDevelopment S.A.S
